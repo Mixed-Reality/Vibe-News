@@ -6,10 +6,7 @@ import Center from "./Center";
 
 const Home: React.FC<RootParamsProps<"Home">> = ({ navigation }) => {
   // Button press for news sentiment type
-  const handleMoodButton = (mood: newsType) => {
-    console.log("mood => ", mood);
-  };
-  
+
   return (
     <Center>
       <Text style={styles.subText}> What news do you want to read ?</Text>

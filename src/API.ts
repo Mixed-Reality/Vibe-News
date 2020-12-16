@@ -1,0 +1,1 @@
+export const NEWS_API = "d461655232c7406ea230e30c7db7fd1f";
