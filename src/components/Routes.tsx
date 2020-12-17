@@ -1,9 +1,11 @@
 import React from "react";
 import Home from "./Home";
-import { NavigationContainer } from "@react-navigation/native";
+import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Posts from "./Posts";
 import { RootStackParamList } from "../RootParamList";
+import { PrimaryColor } from "../Colors";
+import { color } from "react-native-reanimated";
 
 interface RoutesProps {}
 
@@ -15,7 +17,7 @@ const Routes: React.FC<RoutesProps> = ({}) => {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#1ba94c",
+            backgroundColor: PrimaryColor,
           },
           headerTitleStyle: {
             fontSize: 20,
