@@ -41,7 +41,11 @@ const Posts: React.FC<RootParamsProps<"Posts">> = ({ route, navigation }) => {
         <ScrollView style={styles.container}>
           <Center>
             {news.map((article: NewsArticle) => (
-              <Post article={article} key={article.title} />
+              <Post
+                article={article}
+                articleType={newsType}
+                key={article.title}
+              />
             ))}
           </Center>
         </ScrollView>

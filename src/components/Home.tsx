@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { happyFontClr, HappyNews, NeutralNews, PrimaryColor } from "../Colors";
 import { RootParamsProps } from "../RootParamList";
 import { newsType } from "../Types";
 import Center from "./Center";
@@ -12,7 +13,7 @@ const Home: React.FC<RootParamsProps<"Home">> = ({ navigation }) => {
       <Text style={styles.subText}> What news do you want to read ?</Text>
 
       <TouchableOpacity
-        style={styles.btn}
+        style={{ ...styles.btn, backgroundColor: PrimaryColor }}
         onPress={() => {
           navigation.navigate("Posts", {
             newsType: newsType.happy,
@@ -20,7 +21,7 @@ const Home: React.FC<RootParamsProps<"Home">> = ({ navigation }) => {
           });
         }}
       >
-        <Text style={(styles.happyBtn, styles.btnText)}> Happy 🙂</Text>
+        <Text style={{ ...styles.btnText, color: "black" }}> Happy 🙂</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -32,19 +33,27 @@ const Home: React.FC<RootParamsProps<"Home">> = ({ navigation }) => {
           })
         }
       >
-        <Text style={(styles.sadBtn, styles.btnText)}> Sad 😓 </Text>
+        <Text style={(styles.sadBtn, styles.btnText)}> Sad 😢 </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.btn}
+        style={{ ...styles.btn, backgroundColor: NeutralNews }}
         onPress={() =>
           navigation.navigate("Posts", {
             newsType: newsType.neutral,
-            header: " 😓 News",
+            header: " 😢 News",
           })
         }
       >
-        <Text style={(styles.neutralBtn, styles.btnText)}> Meh..😐 </Text>
+        <Text
+          style={{
+            ...styles.btnText,
+            color: "white",
+          }}
+        >
+          {" "}
+          Meh..😐{" "}
+        </Text>
       </TouchableOpacity>
     </Center>
   );
@@ -53,7 +62,7 @@ const Home: React.FC<RootParamsProps<"Home">> = ({ navigation }) => {
 const styles = StyleSheet.create({
   subText: {
     width: "100%",
-    fontSize: 18,
+    fontSize: 24,
     color: "black",
     margin: 30,
     fontFamily: "Roboto",
@@ -66,12 +75,19 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 2,
     margin: 4,
+    borderRadius: 16,
+    shadowColor: "black", // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    backgroundColor: "#fff",
+    elevation: 6, // Android
   },
   btnText: {
     fontSize: 28,
     fontWeight: "bold",
     textAlign: "center",
-    padding: 10,
+    padding: 20,
   },
 
   happyBtn: {},
