@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { NewsArticle } from "../Types";
 import Loading from "./Loading";
 import Post from "./Post";
+// import {} from "vader-sentiment";
+const vader = require("vader-sentiment");
 
 const URL = `http://newsapi.org/v2/top-headlines?country=in&apiKey=${NEWS_API}`;
 
@@ -25,14 +27,6 @@ const Posts: React.FC<RootParamsProps<"Posts">> = ({ route, navigation }) => {
     return () => {};
   }, []);
 
-  // const NewsArticles = (
-  // <ScrollView style={styles.container}>
-  //         news.map((article: NewsArticle) => (
-  //           <Post article={article} key={article.title} />
-  //         ))
-  // </ScrollView>
-  // )
-
   return (
     <Center>
       {isLoading ? (
@@ -40,13 +34,25 @@ const Posts: React.FC<RootParamsProps<"Posts">> = ({ route, navigation }) => {
       ) : (
         <ScrollView style={styles.container}>
           <Center>
-            {news.map((article: NewsArticle) => (
-              <Post
-                article={article}
-                articleType={newsType}
-                key={article.title}
-              />
-            ))}
+            {news
+              .filter((article: NewsArticle) => {
+                console.log(article.title);
+                const compoundScore = vader.SentimentIntensityAnalyzer.polarity_scores(
+                  article.title
+                ).compound;
+                console.log(compoundScore);
+                if (newsType === 0) return compoundScore >= 0.05;
+                else if (newsType === 1) return compoundScore <= -0.5;
+                else if (newsType === 2)
+                  return compoundScore > -0.05 && compoundScore < 0.05;
+              })
+              .map((article: NewsArticle) => (
+                <Post
+                  article={article}
+                  articleType={newsType}
+                  key={article.title}
+                />
+              ))}
           </Center>
         </ScrollView>
       )}
@@ -56,7 +62,7 @@ const Posts: React.FC<RootParamsProps<"Posts">> = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "96%",
+    width: "100%",
     marginTop: 20,
   },
 });

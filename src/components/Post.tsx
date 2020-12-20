@@ -56,9 +56,10 @@ const Post: React.FC<PostProps> = ({ article, articleType }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "95%",
+    width: "90%",
+    justifyContent: "center",
+    alignContent: "center",
     margin: 2,
-    height: "auto",
     borderColor: happyFontClr,
     borderStyle: "solid",
     borderWidth: 2,
