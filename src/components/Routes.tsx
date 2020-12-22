@@ -3,9 +3,9 @@ import Home from "./Home";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Posts from "./Posts";
+import Article from "./Article";
 import { RootStackParamList } from "../RootParamList";
 import { PrimaryColor } from "../Colors";
-import { color } from "react-native-reanimated";
 
 interface RoutesProps {}
 
@@ -38,6 +38,11 @@ const Routes: React.FC<RoutesProps> = ({}) => {
           name="Posts"
           component={Posts}
           options={({ route }) => ({ title: route.params.header })}
+        />
+        <Stack.Screen
+          name="Article"
+          component={Article}
+          options={({ route }) => ({ title: route.params.article.title })}
         />
       </Stack.Navigator>
     </NavigationContainer>
